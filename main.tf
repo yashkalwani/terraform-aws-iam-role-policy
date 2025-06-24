@@ -35,11 +35,11 @@ locals {
       local.current_region
     ), "CROSS_ACCOUNT_ID",
     local.cross_account_id
-    ) : var.assume_role_policy_path
+  ) : var.assume_role_policy_path
 
   inline_policies_doc = {
     for policy_path in var.list_inline_policies_paths :
-    "inline-${replace(basename(policy_path), ".yaml", "")}" => replace(
+    "inline-${replace(basename(policy_path), ".json", "")}" => replace(
       replace(
         file("${path.cwd}/${local.policies_dir}/${policy_path}"),
         "CURRENT_ACCOUNT_ID",
@@ -51,8 +51,8 @@ locals {
   }
 
   customer_managed_policies_doc = {
-    for policy_path in var.list_inline_policies_paths :
-    "custom-${replace(basename(policy_path), ".yaml", "")}" => replace(
+    for policy_path in var.list_custom_managed_policies_paths :
+    "custom-${replace(basename(policy_path), ".json", "")}" => replace(
       replace(
         file("${path.cwd}/${local.policies_dir}/${policy_path}"),
         "CURRENT_ACCOUNT_ID",

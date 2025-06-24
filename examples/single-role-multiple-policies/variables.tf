@@ -17,18 +17,27 @@ variable "role_name_prefix" {
 variable "assume_role_policy_path" {
   description = "The path to the assume role policy document"
   type        = string
+  default     = "{}"
 }
 
 variable "inline_policy_paths" {
   description = "A list of paths to inline policy documents to attach to the role"
   type        = list(string)
+
+  default = []
 }
 variable "managed_policy_arns" {
   description = "A list of ARNs of managed policies to attach to the role"
   type        = list(string)
+  default     = []
 }
 variable "custom_managed_policy_paths" {
   description = "A list of custom managed policy ARNs to attach to the role"
   type        = list(string)
   default     = []
+}
+variable "cross_account_id" {
+  description = "The AWS account ID for cross-account access"
+  type        = string
+
 }
