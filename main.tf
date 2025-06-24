@@ -8,6 +8,8 @@ locals {
     split("-", local.current_region)[2]
   ]))
 
+  cross_account_id = var.cross_account_id
+
   policies_dir = var.policies_dir
 
   policy_name_prefix                = var.policy_name_prefix
@@ -16,40 +18,47 @@ locals {
 
   role_name_prefix = var.role_name_prefix
 
-  role_name = (var.role_name != "" && local.role_name_prefix) ? (
-    "${var.role_name_prefix}-${var.role_name}") : (
+  role_name = (var.role_name != "" && local.role_name_prefix != "") ? (
+    "${var.role_name_prefix}${var.role_name}") : (
     local.role_name_prefix != "" && var.role_name == "" ? (
-      "${local.role_name_prefix}-${local.current_region_short}-role") : (
+      "${local.role_name_prefix}${local.current_region_short}-role") : (
       local.role_name_prefix == "" && var.role_name != "" ? (
         var.role_name) : (
       "${local.current_region_short}-role")
     )
   )
 
-  assume_role_policy_doc = var.assume_role_policy_path != "{}" ? ("${path.cwd}/${local.policies_dir}/${var.assume_role_policy_path}") : var.assume_role_policy_path
+  assume_role_policy_doc = var.assume_role_policy_path != "{}" ? replace(
+    replace(
+      file("${path.cwd}/${local.policies_dir}/${var.assume_role_policy_path}"),
+      "AWS_REGION",
+      local.current_region
+    ), "CROSS_ACCOUNT_ID",
+    local.cross_account_id
+    ) : var.assume_role_policy_path
 
   inline_policies_doc = {
     for policy_path in var.list_inline_policies_paths :
-    "inline-${basename(policy_path, ".yaml", "")}" => replace(
+    "inline-${replace(basename(policy_path), ".yaml", "")}" => replace(
       replace(
         file("${path.cwd}/${local.policies_dir}/${policy_path}"),
         "CURRENT_ACCOUNT_ID",
         "${local.current_account_id}"
       ),
-      "CURRENT_REGION",
+      "AWS_REGION",
       "${local.current_region}"
     )
   }
 
   customer_managed_policies_doc = {
     for policy_path in var.list_inline_policies_paths :
-    "custom-${basename(policy_path, ".yaml", "")}" => replace(
+    "custom-${replace(basename(policy_path), ".yaml", "")}" => replace(
       replace(
         file("${path.cwd}/${local.policies_dir}/${policy_path}"),
         "CURRENT_ACCOUNT_ID",
         "${local.current_account_id}"
       ),
-      "CURRENT_REGION",
+      "AWS_REGION",
       "${local.current_region}"
     )
   }

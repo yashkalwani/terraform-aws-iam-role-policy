@@ -1,0 +1,10 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "iam:*",
+            "Resource": "arn:aws:iam::AWS_REGION:CURRENT_ACCOUNT_ID:role/AWS_REGION-role-1"
+        }
+    ]
+}

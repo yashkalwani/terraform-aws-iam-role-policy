@@ -57,3 +57,9 @@ variable "custom_managed_policy_name_prefix" {
   type        = string
   default     = "custom-"
 }
+
+variable "cross_account_id"{
+  description = "Cross account ID for the IAM role"
+  type        = string
+  default     = ""
+}

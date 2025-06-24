@@ -9,6 +9,7 @@ resource "aws_iam_role_policy" "inline" {
   name   = each.key
   role   = aws_iam_role.this.name
   policy = each.value
+  depends_on = [ aws_iam_role.this ]
 }
 
 resource "aws_iam_role_policy_attachment" "aws_managed" {
@@ -16,6 +17,7 @@ resource "aws_iam_role_policy_attachment" "aws_managed" {
 
   role       = aws_iam_role.this.name
   policy_arn = each.value
+  depends_on = [ aws_iam_role.this ]
 }
 
 resource "aws_iam_policy" "custom" {
@@ -23,6 +25,7 @@ resource "aws_iam_policy" "custom" {
 
   name   = each.key
   policy = each.value
+  depends_on = [ aws_iam_role.this ]
 }
 
 resource "aws_iam_role_policy_attachment" "custom" {
@@ -30,4 +33,5 @@ resource "aws_iam_role_policy_attachment" "custom" {
 
   role       = aws_iam_role.this.name
   policy_arn = each.value.arn
+  depends_on = [ aws_iam_role.this, aws_iam_policy.custom ]
 }
