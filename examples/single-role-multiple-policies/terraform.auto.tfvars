@@ -5,6 +5,6 @@ role_name_prefix = "example-"
 
 cross_account_id = "10000000000"
 assume_role_policy_path = "trust-policy.json"
-inline_policy_paths = ["inline-policy-1.json"]
-managed_policy_arns = []
+inline_policy_paths = ["inline-policy.json"]
+managed_policy_arns = ["arn:aws:iam::aws:policy/AIOpsConsoleAdminPolicy"]
 custom_managed_policy_paths = [ "custom-managed-policy.json" ]
