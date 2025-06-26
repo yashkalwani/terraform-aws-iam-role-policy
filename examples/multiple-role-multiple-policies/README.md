@@ -29,5 +29,7 @@ No resources.
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_entire_output"></a> [entire\_output](#output\_entire\_output) | Outputs from the module. |
 <!-- END_TF_DOCS -->

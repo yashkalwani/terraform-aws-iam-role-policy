@@ -46,5 +46,7 @@ No modules.
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_module_output"></a> [module\_output](#output\_module\_output) | Outputs from the module. |
 <!-- END_TF_DOCS -->
