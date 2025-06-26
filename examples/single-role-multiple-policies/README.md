@@ -26,6 +26,7 @@ No resources.
 |------|-------------|------|---------|:--------:|
 | <a name="input_assume_role_policy_path"></a> [assume\_role\_policy\_path](#input\_assume\_role\_policy\_path) | The path to the assume role policy document | `string` | `"{}"` | no |
 | <a name="input_aws_region"></a> [aws\_region](#input\_aws\_region) | The AWS region to deploy resources in | `string` | `"us-east-1"` | no |
+| <a name="input_common_tags"></a> [common\_tags](#input\_common\_tags) | Common tags to apply to all resources | `map(string)` | n/a | yes |
 | <a name="input_cross_account_id"></a> [cross\_account\_id](#input\_cross\_account\_id) | The AWS account ID for cross-account access | `string` | n/a | yes |
 | <a name="input_custom_managed_policy_paths"></a> [custom\_managed\_policy\_paths](#input\_custom\_managed\_policy\_paths) | A list of custom managed policy ARNs to attach to the role | `list(string)` | `[]` | no |
 | <a name="input_inline_policy_paths"></a> [inline\_policy\_paths](#input\_inline\_policy\_paths) | A list of paths to inline policy documents to attach to the role | `list(string)` | `[]` | no |

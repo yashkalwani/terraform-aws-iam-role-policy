@@ -1,4 +1,7 @@
 aws_region = "us-east-1"
+common_tags = {
+  "CreatedBy" = "Terraform"
+}
 
 role_name = "sample-role"
 role_name_prefix = "example-"

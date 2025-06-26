@@ -39,5 +39,9 @@ variable "custom_managed_policy_paths" {
 variable "cross_account_id" {
   description = "The AWS account ID for cross-account access"
   type        = string
+}
 
+variable "common_tags" {
+  description = "Common tags to apply to all resources"
+  type        = map(string)
 }

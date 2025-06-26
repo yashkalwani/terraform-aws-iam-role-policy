@@ -33,6 +33,7 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_assume_role_policy_path"></a> [assume\_role\_policy\_path](#input\_assume\_role\_policy\_path) | Assume role policy document for the IAM role | `string` | `"{}"` | no |
+| <a name="input_common_tags"></a> [common\_tags](#input\_common\_tags) | Common tags to apply to the IAM role and policies | `map(string)` | `{}` | no |
 | <a name="input_cross_account_id"></a> [cross\_account\_id](#input\_cross\_account\_id) | Cross account ID for the IAM role | `string` | `""` | no |
 | <a name="input_custom_managed_policy_name_prefix"></a> [custom\_managed\_policy\_name\_prefix](#input\_custom\_managed\_policy\_name\_prefix) | Prefix for custom managed policy names | `string` | `"custom-"` | no |
 | <a name="input_inline_policy_name_prefix"></a> [inline\_policy\_name\_prefix](#input\_inline\_policy\_name\_prefix) | Prefix for inline policy names | `string` | `"inline-"` | no |

@@ -25,6 +25,7 @@ No resources.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_aws_region"></a> [aws\_region](#input\_aws\_region) | The AWS region to deploy resources in | `string` | `"us-east-1"` | no |
+| <a name="input_common_tags"></a> [common\_tags](#input\_common\_tags) | Common tags to apply to all resources | `map(string)` | `{}` | no |
 | <a name="input_role_policy_map"></a> [role\_policy\_map](#input\_role\_policy\_map) | Map of role names to their associated policies | <pre>map(object({<br/>    role_name                   = string<br/>    role_name_prefix            = string<br/>    cross_account_id            = string<br/>    assume_role_policy_path     = string<br/>    inline_policy_paths         = list(string)<br/>    custom_managed_policy_paths = list(string)<br/>    managed_policy_arns         = list(string)<br/>  }))</pre> | n/a | yes |
 
 ## Outputs

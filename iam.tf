@@ -1,6 +1,13 @@
 resource "aws_iam_role" "this" {
   name               = substr(local.role_name, 0, 64)
   assume_role_policy = local.assume_role_policy_doc
+ 
+  tags = merge(
+    local.tags,
+    {
+      "Name" = substr(local.role_name, 0, 64)
+    }
+  )
 }
 
 resource "aws_iam_role_policy" "inline" {
@@ -25,6 +32,12 @@ resource "aws_iam_policy" "custom" {
 
   name       = substr(each.key, 0, 64)
   policy     = each.value
+  tags = merge(
+    local.tags,
+    {
+      "Name" = substr(local.role_name, 0, 64)
+    }
+  )
   depends_on = [aws_iam_role.this]
 }
 

@@ -16,3 +16,10 @@ variable "role_policy_map" {
     managed_policy_arns         = list(string)
   }))
 }
+
+variable "common_tags" {
+  description = "Common tags to apply to all resources"
+  type        = map(string)
+  default     = {}
+  
+}

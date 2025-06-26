@@ -64,4 +64,6 @@ locals {
   }
 
   aws_managed_policies_arns = var.list_aws_managed_policies_arns
+
+  tags = var.common_tags
 }

@@ -24,4 +24,5 @@ module "role_policy" {
   list_inline_policies_paths         = each.value.inline_policy_paths
   list_custom_managed_policies_paths = each.value.custom_managed_policy_paths
   list_aws_managed_policies_arns     = each.value.managed_policy_arns
+  common_tags                        = var.common_tags
 }

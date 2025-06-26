@@ -63,3 +63,10 @@ variable "cross_account_id"{
   type        = string
   default     = ""
 }
+
+variable "common_tags" {
+  description = "Common tags to apply to the IAM role and policies"
+  type        = map(string)
+  default     = {}
+  
+}
