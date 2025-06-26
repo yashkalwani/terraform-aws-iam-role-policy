@@ -3,7 +3,7 @@ locals {
   current_account_id = data.aws_caller_identity.current.account_id
   current_region     = data.aws_region.current.name
   current_region_short = lower(join("", [
-    substr(split("-", local.current_region)[0], 0, 1),
+    substr(split("-", local.current_region)[0], 0, 2),
     substr(split("-", local.current_region)[1], 0, 1),
     split("-", local.current_region)[2]
   ]))
