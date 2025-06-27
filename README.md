@@ -10,6 +10,11 @@ A Terraform module to create an **AWS IAM Role** with support for:
 All policy documents are defined as `.json` files under the `policies/` directory relative to the current working directory.
 
 ---
+## Read more 
+
+Terraform Registry Module - https://registry.terraform.io/modules/yashkalwani/iam-role-policy/aws/latest
+
+---
 
 ## 📦 Module Features
 
