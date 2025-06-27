@@ -1,6 +1,91 @@
 # tf-aws-iam-role-policy
-Terrafrom Module for AWS IAM Role and it's various policies to be attached. It is a a simplified apprach to managing IAM Roles and Policies attachment easily.
 
+A Terraform module to create an **AWS IAM Role** with support for:
+
+✅ Custom Trust Policy  
+✅ Multiple Inline Policies  
+✅ Multiple AWS Managed Policies  
+✅ Multiple Customer Managed Policies  
+
+All policy documents are defined as `.json` files under the `policies/` directory relative to the current working directory.
+
+---
+
+## 📦 Module Features
+
+This module allows you to:
+
+- Create an IAM Role with a custom trust policy
+- Attach multiple inline policies defined as JSON files
+- Attach existing AWS Managed Policies by ARN
+- Attach existing Customer Managed Policies by ARN
+
+---
+
+## 🗂 Directory Structure
+
+```bash
+.
+├── main.tf
+├── variables.tf
+├── outputs.tf
+├── policies/
+│   ├── trust-policy.json
+│   ├── inline-policy-1.json
+│   ├── inline-policy-2.json
+│   └── ... additional policy files
+```
+
+---
+## Example Usage
+
+### Single role multiple policies (SRMP)
+```
+module "role_policy" {
+  source                             = "github.com/yashkalwani/terraform-aws-iam-role-policy"
+  
+  cross_account_id                   = var.cross_account_id
+  role_name                          = var.role_name
+  role_name_prefix                   = var.role_name_prefix
+  assume_role_policy_path            = var.assume_role_policy_path
+  list_inline_policies_paths         = var.inline_policy_paths
+  list_custom_managed_policies_paths = var.custom_managed_policy_paths
+  list_aws_managed_policies_arns     = var.managed_policy_arns
+  common_tags                        = var.common_tags
+}
+```
+
+### Multiple role multiple policies (MRMP)
+
+```
+module "role_policy" {
+  source    = "github.com/yashkalwani/terraform-aws-iam-role-policy"
+
+  for_each  = var.role_policy_map
+  role_name = each.key
+
+  cross_account_id                   = each.value.cross_account_id
+  role_name_prefix                   = each.value.role_name_prefix
+  assume_role_policy_path            = each.value.assume_role_policy_path
+  list_inline_policies_paths         = each.value.inline_policy_paths
+  list_custom_managed_policies_paths = each.value.custom_managed_policy_paths
+  list_aws_managed_policies_arns     = each.value.managed_policy_arns
+  common_tags                        = var.common_tags
+}
+```
+
+---
+## Placeholders available for substitution
+
+These placeholders can be used in the policy.json file. It will be replaced with corresponding values at run time. This feature eases the policy document management.
+
+| Name | Description | Type | Default | Required to pass |
+|------|-------------|------|---------|-------|
+| AWS_REGION | AWS Region for the current provider | `string` | `always providers region` | no |
+| CURRENT_ACCOUNT_ID | Current AWS Account ID | `string` | `Pulled from credentials` | no |
+| CROSS_ACCOUNT_ID | Description | `string` | `""` if not passed in the module block | `yes` if it is used in the json for replacement |
+
+---
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
