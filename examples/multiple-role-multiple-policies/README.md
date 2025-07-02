@@ -14,7 +14,7 @@ No providers.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_role_policy"></a> [role\_policy](#module\_role\_policy) | ../../ | n/a |
+| <a name="module_role_policy"></a> [role\_policy](#module\_role\_policy) | yashkalwani/iam-role-policy/aws | n/a |
 
 ## Resources
 

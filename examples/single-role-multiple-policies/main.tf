@@ -14,7 +14,7 @@ provider "aws" {
 }
 
 module "role_policy" {
-  source                             = "../../"
+  source                             = "yashkalwani/iam-role-policy/aws"
   cross_account_id                   = var.cross_account_id
   role_name                          = var.role_name
   role_name_prefix                   = var.role_name_prefix

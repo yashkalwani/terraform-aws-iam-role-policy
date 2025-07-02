@@ -14,7 +14,7 @@ provider "aws" {
 }
 
 module "role_policy" {
-  source    = "../../"
+  source    = "yashkalwani/iam-role-policy/aws"
   for_each  = var.role_policy_map
   role_name = each.key
 
