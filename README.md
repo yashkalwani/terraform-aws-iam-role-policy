@@ -1,11 +1,11 @@
-# tf-aws-iam-role-policy
+# tf-aws-iam-role-policy in JSON format
 
 A Terraform module to create an **AWS IAM Role** with support for:
 
-✅ Custom Trust Policy  
-✅ Multiple Inline Policies  
-✅ Multiple AWS Managed Policies  
-✅ Multiple Customer Managed Policies  
+✅ Custom Trust Policy  (JSON)  
+✅ Multiple Inline Policies  (JSON)  
+✅ Multiple AWS Managed Policies  (JSON)  
+✅ Multiple Customer Managed Policies  (JSON) 
 
 All policy documents are defined as `.json` files under the `policies/` directory relative to the current working directory.
 
@@ -14,6 +14,16 @@ All policy documents are defined as `.json` files under the `policies/` director
 
 Terraform Registry Module - https://registry.terraform.io/modules/yashkalwani/iam-role-policy/aws/latest
 
+---
+
+## 🔽 Downloads from Terraform Registry Module
+
+| Time period | Count |
+|------------:|:------|
+| **Week**    | ![](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fregistry.terraform.io%2Fv2%2Fmodules%2Fyashkalwani%2Fiam-role-policy%2Faws%2Fdownloads%2Fsummary&query=%24.data.attributes.week&style=plastic&logo=terraform&logoSize=500&label=week&labelColor=white&color=green) |
+| **Month**   | ![](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fregistry.terraform.io%2Fv2%2Fmodules%2Fyashkalwani%2Fiam-role-policy%2Faws%2Fdownloads%2Fsummary&query=%24.data.attributes.month&style=plastic&logo=terraform&logoSize=500&label=month&labelColor=white&color=green) |
+| **Year**    | ![](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fregistry.terraform.io%2Fv2%2Fmodules%2Fyashkalwani%2Fiam-role-policy%2Faws%2Fdownloads%2Fsummary&query=%24.data.attributes.year&style=plastic&logo=terraform&logoSize=500&label=year&labelColor=white&color=green) |
+| **Total**   | ![](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fregistry.terraform.io%2Fv2%2Fmodules%2Fyashkalwani%2Fiam-role-policy%2Faws%2Fdownloads%2Fsummary&query=%24.data.attributes.total&style=plastic&logo=terraform&logoSize=500&label=total&labelColor=white&color=green) |
 ---
 
 ## 📦 Module Features
@@ -45,7 +55,8 @@ This module allows you to:
 ## Example Usage
 
 ### Single role multiple policies (SRMP)
-```
+`main.tf`
+```h
 module "role_policy" {
   source                             = "github.com/yashkalwani/terraform-aws-iam-role-policy"
   
@@ -59,9 +70,25 @@ module "role_policy" {
   common_tags                        = var.common_tags
 }
 ```
+`tfvars`
+```h
+aws_region = "us-east-1"
+common_tags = {
+  "CreatedBy" = "Terraform"
+}
+
+role_name = "sample-role"
+role_name_prefix = "example-"
+
+cross_account_id = "1234567890123"
+assume_role_policy_path = "trust-policy.json"
+inline_policy_paths = ["inline-policy.json"]
+managed_policy_arns = ["arn:aws:iam::aws:policy/AIOpsConsoleAdminPolicy"]
+custom_managed_policy_paths = [ "custom-managed-policy.json" ]
+```
 
 ### Multiple role multiple policies (MRMP)
-
+`main.tf`
 ```
 module "role_policy" {
   source    = "github.com/yashkalwani/terraform-aws-iam-role-policy"
@@ -78,7 +105,23 @@ module "role_policy" {
   common_tags                        = var.common_tags
 }
 ```
+`tfvars`
+```h
+aws_region = "us-east-1"
 
+role_policy_map = {
+  "multiple-sample-role" = {
+    role_name                   = "multiple-sample-role"
+    cross_account_id            = "123456789012"
+    role_name_prefix            = "example-"
+    assume_role_policy_path     = "trust-policy.json"
+    inline_policy_paths         = ["inline-policy.json"]
+    custom_managed_policy_paths = ["custom-multi-managed-policy.json", "custom-multi-managed-eks-policy.json"]
+    managed_policy_arns         = ["arn:aws:iam::aws:policy/AIOpsConsoleAdminPolicy", "arn:aws:iam::aws:policy/AWSAccountActivityAccess"]
+  }
+}
+
+```
 ---
 ## Placeholders available for substitution
 
