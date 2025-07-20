@@ -54,7 +54,7 @@ This module allows you to:
 ---
 ## Example Usage
 
-### Single role multiple policies (SRMP)
+### [Single role multiple policies (SRMP)](examples/single-role-multiple-policies)
 `main.tf`
 ```h
 module "role_policy" {
@@ -87,9 +87,9 @@ managed_policy_arns = ["arn:aws:iam::aws:policy/AIOpsConsoleAdminPolicy"]
 custom_managed_policy_paths = [ "custom-managed-policy.json" ]
 ```
 
-### Multiple role multiple policies (MRMP)
+### [Multiple role multiple policies (MRMP)](examples/multiple-role-multiple-policies)
 `main.tf`
-```
+```h
 module "role_policy" {
   source    = "github.com/yashkalwani/terraform-aws-iam-role-policy"
 
